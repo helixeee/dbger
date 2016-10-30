@@ -1,0 +1,58 @@
+/**
+ * Copyright (C) 2016 helixeee
+ *
+ * This file is part of dbger.
+ *
+ * dbger is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * dbger is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ * PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the
+ * GNU General Public License
+ * along with dbger.  If not, see
+ * <http://www.gnu.org/licenses/>.
+ */
+
+#include "test/core/mock/indicator_mock.h"
+
+#include "CppUTest/TestHarness.h"
+#include "CppUTestExt/MockSupport.h"
+
+namespace dbger {
+
+IndicatorMock::~IndicatorMock() {
+}
+
+bool IndicatorMock::switchConnect(bool on) {
+  const int switch_on = (on) ? 1 : 0;
+  mock().actualCall("Indicator::switchConnect")
+      .withParameter("on", switch_on);
+
+  bool return_val = false;
+  if (mock().intReturnValue() != 0) {
+    return_val = true;
+  }
+  return return_val;
+}
+
+bool IndicatorMock::switchRunning(bool on) {
+  const int switch_on = (on) ? 1 : 0;
+  mock().actualCall("Indicator::switchRunning")
+      .withParameter("on", switch_on);
+
+  bool return_val = false;
+  if (mock().intReturnValue() != 0) {
+    return_val = true;
+  }
+  return return_val;
+}
+
+}  // namespace dbger
